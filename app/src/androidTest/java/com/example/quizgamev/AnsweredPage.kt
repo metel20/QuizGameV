@@ -1,4 +1,5 @@
 package com.example.quizgamev
+
 import android.graphics.Color
 import android.widget.Button
 import android.widget.LinearLayout
@@ -19,13 +20,13 @@ class AnsweredPage {
     fun checkVisible() {
         onView(
             allOf(
-                withId(R.id.actionButtton),
-                withText("next")
+                withId(R.id.actionButton),
+                withText("next"),
                 isAssignableFrom(Button::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
                 withParent(withId(R.id.rootLayout))
             )
-        ).check(matches())
+        ).check(matches(ButtonColorMatcher("#6AD9E8")))
     }
 
     fun checkQuestionVisible(question: String) {
@@ -77,7 +78,7 @@ class AnsweredPage {
     fun clickNext() {
         onView(
             allOf(
-                withId(R.id.actionButtton),
+                withId(R.id.actionButton),
                 withText("next"),
                 isAssignableFrom(Button::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
@@ -89,7 +90,7 @@ class AnsweredPage {
     fun checkNotVisible() {
         onView(
             allOf(
-                withId(R.id.actionButtton),
+                withId(R.id.actionButton),
                 isAssignableFrom(Button::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
                 withParent(withId(R.id.rootLayout))

@@ -1,5 +1,6 @@
 package com.example.quizgamev
 
+import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.View
 import android.widget.Button
@@ -8,6 +9,8 @@ import org.hamcrest.Description
 
 class ButtonColorMatcher(private val color: Int) :
     BoundedMatcher<View, Button>(Button::class.java) {
+
+    constructor(colorString: String) : this(Color.parseColor(colorString))
 
     override fun describeTo(description: Description) {
         description.appendText("color for button")

@@ -1,4 +1,5 @@
 package com.example.quizgamev
+
 import android.graphics.Color
 import android.widget.Button
 import android.widget.LinearLayout
@@ -19,7 +20,7 @@ class GameOverPage {
     fun checkVisible() {
         onView(
             allOf(
-                withId(R.id.actionButtton),
+                withId(R.id.actionButton),
                 withText("game over"),
                 isAssignableFrom(Button::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
@@ -77,7 +78,7 @@ class GameOverPage {
     fun clickGameOver() {
         onView(
             allOf(
-                withId(R.id.actionButtton),
+                withId(R.id.actionButton),
                 withText("game over"),
                 isAssignableFrom(Button::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
@@ -89,7 +90,7 @@ class GameOverPage {
     fun checkNotVisible() {
         onView(
             allOf(
-                withId(R.id.actionButtton),
+                withId(R.id.actionButton),
                 isAssignableFrom(Button::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
                 withParent(withId(R.id.rootLayout))
