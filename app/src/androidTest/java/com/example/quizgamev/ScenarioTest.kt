@@ -22,7 +22,7 @@ class ScenarioTest {
         answeredPage.checkVisible()
         answeredPage.checkQuestionVisible(question = "What color is christmas tree?")
         answeredPage.checkAnswerCorrect(text = "green")
-        answeredPage.checkChoicesNotAvailable(choices = listOf("yellow", "red", "blue"))
+        answeredPage.checkChoicesNotAvailable(choices = list Of("yellow", "red", "blue"))
         answeredPage.clickChoice(text = "yellow")
         answeredPage.checkVisible()
         answeredPage.clickChoice(text = "red")
