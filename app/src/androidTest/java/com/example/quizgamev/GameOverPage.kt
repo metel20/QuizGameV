@@ -1,35 +1,35 @@
 package com.example.quizgamev
 
 import android.graphics.Color
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isAssignableFrom
-import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import org.hamcrest.CoreMatchers.allOf
-import org.hamcrest.CoreMatchers.not
 
-class GameOverPage {
+class GameOverPage(
+    private val question: String
+) {
 
     fun checkVisible() {
         onView(
             allOf(
                 withId(R.id.actionButton),
                 withText("game over"),
-                isAssignableFrom(Button::class.java),
+                isAssignableFrom(AppCompatButton::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
                 withParent(withId(R.id.rootLayout))
             )
         ).check(matches(ButtonColorMatcher("#6AD9E8")))
     }
 
-    fun checkQuestionVisible(question: String) {
+    fun checkQuestionVisible() {
         onView(
             allOf(
                 withId(R.id.questionTextView),
@@ -44,7 +44,7 @@ class GameOverPage {
         onView(
             allOf(
                 withText(text),
-                isAssignableFrom(Button::class.java),
+                isAssignableFrom(AppCompatButton::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
                 withParent(withId(R.id.rootLayout))
             )
@@ -56,7 +56,7 @@ class GameOverPage {
             onView(
                 allOf(
                     withText(text),
-                    isAssignableFrom(Button::class.java),
+                    isAssignableFrom(AppCompatButton::class.java),
                     withParent(isAssignableFrom(LinearLayout::class.java)),
                     withParent(withId(R.id.rootLayout))
                 )
@@ -68,7 +68,7 @@ class GameOverPage {
         onView(
             allOf(
                 withText(text),
-                isAssignableFrom(Button::class.java),
+                isAssignableFrom(AppCompatButton::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
                 withParent(withId(R.id.rootLayout))
             )
@@ -80,29 +80,18 @@ class GameOverPage {
             allOf(
                 withId(R.id.actionButton),
                 withText("game over"),
-                isAssignableFrom(Button::class.java),
+                isAssignableFrom(AppCompatButton::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
                 withParent(withId(R.id.rootLayout))
             )
         ).perform(click())
     }
 
-    fun checkNotVisible() {
-        onView(
-            allOf(
-                withId(R.id.actionButton),
-                isAssignableFrom(Button::class.java),
-                withParent(isAssignableFrom(LinearLayout::class.java)),
-                withParent(withId(R.id.rootLayout))
-            )
-        ).check(matches(not(isDisplayed())))
-    }
-
     fun checkAnswerIncorrect(text: String) {
         onView(
             allOf(
                 withText(text),
-                isAssignableFrom(Button::class.java),
+                isAssignableFrom(AppCompatButton::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
                 withParent(withId(R.id.rootLayout))
             )

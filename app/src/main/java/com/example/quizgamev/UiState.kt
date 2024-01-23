@@ -4,8 +4,9 @@ import android.graphics.Color
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import java.io.Serializable
 
-interface UiState {
+interface UiState : Serializable {
 
     fun show(questionTextView: TextView)
     fun show(vararg choices: Button)

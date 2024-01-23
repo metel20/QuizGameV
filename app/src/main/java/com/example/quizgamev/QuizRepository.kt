@@ -1,4 +1,7 @@
 package com.example.quizgamev
+
+import android.content.Context
+
 interface QuizRepository {
 
     fun next()
@@ -7,7 +10,13 @@ interface QuizRepository {
 
     fun isLastQuestion(): Boolean
 
-    class Base : QuizRepository {//todo replace questions and choices
+    fun finishGame()
+
+    fun save()
+
+    class Base(
+        private val permanentStorage: PermanentStorage
+    ) : QuizRepository {
 
         private val list = listOf(
             QuestionAndChoices(
@@ -28,7 +37,7 @@ interface QuizRepository {
             )
         )
 
-        private var index = 0
+        private var index = permanentStorage.index()
 
         override fun next() {
             index++
@@ -42,9 +51,49 @@ interface QuizRepository {
             return index == list.size - 1
         }
 
+        override fun finishGame() {
+            index = 0
+        }
+
+        override fun save() {
+            permanentStorage.saveIndex(index)
+        }
     }
 }
 
 data class QuestionAndChoices(val question: String, val choices: List<Choice>)
 
 data class Choice(val value: String, val correct: Boolean)
+
+interface PermanentStorage {
+
+    fun index(): Int
+
+    fun saveIndex(index: Int)
+
+    class Base(context: Context) : PermanentStorage {
+
+        private val sharedPref = context.getSharedPreferences("quizGameData", Context.MODE_PRIVATE)
+
+        override fun index(): Int {
+            return sharedPref.getInt("index", 0)
+        }
+
+        override fun saveIndex(index: Int) {
+            sharedPref.edit().putInt("index", index).apply()
+        }
+    }
+
+    class Mock : PermanentStorage {
+
+        private var index = 0
+
+        override fun index(): Int {
+            return index
+        }
+
+        override fun saveIndex(index: Int) {
+            this.index = index
+        }
+    }
+}

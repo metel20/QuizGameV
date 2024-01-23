@@ -15,16 +15,21 @@ class ScenarioTest {
 
     @Test
     fun correctTwice() {
-        val questionPage = QuestionPage()
-        questionPage.checkQuestionVisible(question = "What color is christmas tree?")
-        questionPage.checkAnswers(answers = listOf("green", "yellow", "red", "blue"))
+        var questionPage = QuestionPage(
+            question = "What color is christmas tree?",
+            choices = listOf("green", "yellow", "red", "blue")
+        )
+        questionPage.checkQuestionVisible()
+        questionPage.checkAnswers()
+        activityScenarioRule.scenario.recreate()
         questionPage.clickAnswer(value = "green")
 
-        val answeredPage = AnsweredPage()
+        val answeredPage = AnsweredPage(question = "What color is christmas tree?")
         answeredPage.checkVisible()
-        answeredPage.checkQuestionVisible(question = "What color is christmas tree?")
+        answeredPage.checkQuestionVisible()
         answeredPage.checkAnswerCorrect(text = "green")
         answeredPage.checkChoicesNotAvailable(choices = listOf("yellow", "red", "blue"))
+        activityScenarioRule.scenario.recreate()
         answeredPage.clickChoice(text = "yellow")
         answeredPage.checkVisible()
         answeredPage.clickChoice(text = "red")
@@ -36,15 +41,21 @@ class ScenarioTest {
         answeredPage.clickNext()
         answeredPage.checkNotVisible()
 
-        questionPage.checkQuestionVisible(question = "What color is milk?")
-        questionPage.checkAnswers(answers = listOf("green", "white", "red", "blue"))
+        questionPage = QuestionPage(
+            question = "What color is milk?",
+            choices = listOf("green", "white", "red", "blue")
+        )
+        questionPage.checkQuestionVisible()
+        questionPage.checkAnswers()
+        activityScenarioRule.scenario.recreate()
         questionPage.clickAnswer(value = "white")
 
-        val gameOverPage = GameOverPage()
+        val gameOverPage = GameOverPage(question = "What color is milk?")
         gameOverPage.checkVisible()
-        gameOverPage.checkQuestionVisible(question = "What color is milk?")
+        gameOverPage.checkQuestionVisible()
         gameOverPage.checkAnswerCorrect(text = "white")
         gameOverPage.checkChoicesNotAvailable(choices = listOf("green", "red", "blue"))
+        activityScenarioRule.scenario.recreate()
         gameOverPage.clickChoice(text = "white")
         gameOverPage.checkVisible()
         gameOverPage.clickChoice(text = "red")
@@ -59,14 +70,17 @@ class ScenarioTest {
 
     @Test
     fun correctThenIncorrect() {
-        val questionPage = QuestionPage()
-        questionPage.checkQuestionVisible(question = "What color is christmas tree?")
-        questionPage.checkAnswers(answers = listOf("green", "yellow", "red", "blue"))
+        var questionPage = QuestionPage(
+            question = "What color is christmas tree?",
+            choices = listOf("green", "yellow", "red", "blue")
+        )
+        questionPage.checkQuestionVisible()
+        questionPage.checkAnswers()
         questionPage.clickAnswer(value = "green")
 
-        val answeredPage = AnsweredPage()
+        val answeredPage = AnsweredPage(question = "What color is christmas tree?")
         answeredPage.checkVisible()
-        answeredPage.checkQuestionVisible(question = "What color is christmas tree?")
+        answeredPage.checkQuestionVisible()
         answeredPage.checkAnswerCorrect(text = "green")
         answeredPage.checkChoicesNotAvailable(choices = listOf("yellow", "red", "blue"))
         answeredPage.clickChoice(text = "yellow")
@@ -80,13 +94,17 @@ class ScenarioTest {
         answeredPage.clickNext()
         answeredPage.checkNotVisible()
 
-        questionPage.checkQuestionVisible(question = "What color is milk?")
-        questionPage.checkAnswers(answers = listOf("green", "white", "red", "blue"))
+        questionPage = QuestionPage(
+            question = "What color is milk?",
+            choices = listOf("green", "white", "red", "blue")
+        )
+        questionPage.checkQuestionVisible()
+        questionPage.checkAnswers()
         questionPage.clickAnswer(value = "red")
 
-        val gameOverPage = GameOverPage()
+        val gameOverPage = GameOverPage(question = "What color is milk?")
         gameOverPage.checkVisible()
-        gameOverPage.checkQuestionVisible(question = "What color is milk?")
+        gameOverPage.checkQuestionVisible()
         gameOverPage.checkAnswerCorrect(text = "white")
         gameOverPage.checkAnswerIncorrect(text = "red")
         gameOverPage.checkChoicesNotAvailable(choices = listOf("green", "blue"))
@@ -104,14 +122,17 @@ class ScenarioTest {
 
     @Test
     fun incorrectTwice() {
-        val questionPage = QuestionPage()
-        questionPage.checkQuestionVisible(question = "What color is christmas tree?")
-        questionPage.checkAnswers(answers = listOf("green", "yellow", "red", "blue"))
-        questionPage.clickAnswer(value = "yellow")
+        var questionPage = QuestionPage(
+            question = "What color is christmas tree?",
+            choices = listOf("green", "yellow", "red", "blue")
+        )
+        questionPage.checkQuestionVisible()
+        questionPage.checkAnswers()
+        questionPage.clickAnswer(value = "green")
 
-        val answeredPage = AnsweredPage()
+        val answeredPage = AnsweredPage(question = "What color is christmas tree?")
         answeredPage.checkVisible()
-        answeredPage.checkQuestionVisible(question = "What color is christmas tree?")
+        answeredPage.checkQuestionVisible()
         answeredPage.checkAnswerCorrect(text = "green")
         answeredPage.checkAnswerIncorrect(text = "yellow")
         answeredPage.checkChoicesNotAvailable(choices = listOf("red", "blue"))
@@ -126,13 +147,17 @@ class ScenarioTest {
         answeredPage.clickNext()
         answeredPage.checkNotVisible()
 
-        questionPage.checkQuestionVisible(question = "What color is milk?")
-        questionPage.checkAnswers(answers = listOf("green", "white", "red", "blue"))
-        questionPage.clickAnswer(value = "blue")
+        questionPage = QuestionPage(
+            question = "What color is milk?",
+            choices = listOf("green", "white", "red", "blue")
+        )
+        questionPage.checkQuestionVisible()
+        questionPage.checkAnswers()
+        questionPage.clickAnswer(value = "red")
 
-        val gameOverPage = GameOverPage()
+        val gameOverPage = GameOverPage(question = "What color is milk?")
         gameOverPage.checkVisible()
-        gameOverPage.checkQuestionVisible(question = "What color is milk?")
+        gameOverPage.checkQuestionVisible()
         gameOverPage.checkAnswerCorrect(text = "white")
         gameOverPage.checkAnswerIncorrect(text = "blue")
         gameOverPage.checkChoicesNotAvailable(choices = listOf("green", "red"))
@@ -150,14 +175,17 @@ class ScenarioTest {
 
     @Test
     fun incorrectThenCorrect() {
-        val questionPage = QuestionPage()
-        questionPage.checkQuestionVisible(question = "What color is christmas tree?")
-        questionPage.checkAnswers(answers = listOf("green", "yellow", "red", "blue"))
-        questionPage.clickAnswer(value = "red")
+        var questionPage = QuestionPage(
+            question = "What color is christmas tree?",
+            choices = listOf("green", "yellow", "red", "blue")
+        )
+        questionPage.checkQuestionVisible()
+        questionPage.checkAnswers()
+        questionPage.clickAnswer(value = "green")
 
-        val answeredPage = AnsweredPage()
+        val answeredPage = AnsweredPage(question = "What color is christmas tree?")
         answeredPage.checkVisible()
-        answeredPage.checkQuestionVisible(question = "What color is christmas tree?")
+        answeredPage.checkQuestionVisible()
         answeredPage.checkAnswerCorrect(text = "green")
         answeredPage.checkAnswerIncorrect(text = "red")
         answeredPage.checkChoicesNotAvailable(choices = listOf("yellow", "blue"))
@@ -172,13 +200,17 @@ class ScenarioTest {
         answeredPage.clickNext()
         answeredPage.checkNotVisible()
 
-        questionPage.checkQuestionVisible(question = "What color is milk?")
-        questionPage.checkAnswers(answers = listOf("green", "white", "red", "blue"))
-        questionPage.clickAnswer(value = "white")
+        questionPage = QuestionPage(
+            question = "What color is milk?",
+            choices = listOf("green", "white", "red", "blue")
+        )
+        questionPage.checkQuestionVisible()
+        questionPage.checkAnswers()
+        questionPage.clickAnswer(value = "red")
 
-        val gameOverPage = GameOverPage()
+        val gameOverPage = GameOverPage(question = "What color is milk?")
         gameOverPage.checkVisible()
-        gameOverPage.checkQuestionVisible(question = "What color is milk?")
+        gameOverPage.checkQuestionVisible()
         gameOverPage.checkAnswerCorrect(text = "white")
         gameOverPage.checkChoicesNotAvailable(choices = listOf("green", "red", "blue"))
         gameOverPage.clickChoice(text = "white")

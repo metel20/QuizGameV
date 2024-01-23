@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/choiceOneButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
             android:layout_marginHorizontal="@dimen/medium_margin"
             android:layout_marginVertical="@dimen/small_margin" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/choiceTwoButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
             android:layout_marginHorizontal="@dimen/medium_margin"
             android:layout_marginVertical="@dimen/small_margin" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/choiceThreeButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
@@ -47,7 +47,7 @@
             android:layout_marginHorizontal="@dimen/medium_margin"
             android:layout_marginVertical="@dimen/small_margin" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/choiceFourButton"
             style="@style/Widget.AppCompat.Button"
             android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/actionButton"
         style="@style/Widget.AppCompat.Button"
         android:layout_width="match_parent"

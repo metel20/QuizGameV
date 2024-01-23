@@ -1,6 +1,8 @@
 package com.example.quizgamev
 
-class QuizViewModel(private val repository: QuizRepository) {
+import androidx.lifecycle.ViewModel
+
+class QuizViewModel(private val repository: QuizRepository) : ViewModel() {
 
     fun init(): UiState {
         val data = repository.questionAndChoices()
@@ -26,10 +28,15 @@ class QuizViewModel(private val repository: QuizRepository) {
 
     fun next(): UiState {
         return if (repository.isLastQuestion()) {
+            repository.finishGame()
             UiState.GameOver
         } else {
             repository.next()
             init()
         }
+    }
+
+    fun save() {
+        repository.save()
     }
 }

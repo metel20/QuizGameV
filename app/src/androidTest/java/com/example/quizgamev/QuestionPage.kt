@@ -1,9 +1,9 @@
 package com.example.quizgamev
 
 import android.graphics.Color
-import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -14,9 +14,12 @@ import androidx.test.espresso.matcher.ViewMatchers.withParent
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import org.hamcrest.CoreMatchers.allOf
 
-class QuestionPage {
+class QuestionPage(
+    private val question: String,
+    private val choices: List<String>
+) {
 
-    fun checkQuestionVisible(question: String) {
+    fun checkQuestionVisible() {
         onView(
             allOf(
                 withId(R.id.questionTextView),
@@ -27,12 +30,12 @@ class QuestionPage {
         ).check(matches(withText(question)))
     }
 
-    fun checkAnswers(answers: List<String>) {
-        answers.forEach { answer ->
+    fun checkAnswers() {
+        choices.forEach { answer ->
             val answerView = onView(
                 allOf(
                     withText(answer),
-                    isAssignableFrom(Button::class.java),
+                    isAssignableFrom(AppCompatButton::class.java),
                     withParent(isAssignableFrom(LinearLayout::class.java)),
                     withParent(withId(R.id.rootLayout))
                 )
@@ -46,7 +49,7 @@ class QuestionPage {
         onView(
             allOf(
                 withText(value),
-                isAssignableFrom(Button::class.java),
+                isAssignableFrom(AppCompatButton::class.java),
                 withParent(isAssignableFrom(LinearLayout::class.java)),
                 withParent(withId(R.id.rootLayout))
             )
