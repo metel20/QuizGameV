@@ -15,6 +15,7 @@
         android:id="@+id/questionTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:freezesText="true"
         android:gravity="center"
         android:padding="@dimen/medium_margin"
         android:textAppearance="@style/TextAppearance.AppCompat.Title"
@@ -25,28 +26,28 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.example.quizgamev.ChoiceButton
         android:id="@+id/choiceOneButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/medium_margin"
         android:layout_marginVertical="@dimen/small_margin" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.example.quizgamev.ChoiceButton
         android:id="@+id/choiceTwoButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/medium_margin"
         android:layout_marginVertical="@dimen/small_margin" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.example.quizgamev.ChoiceButton
         android:id="@+id/choiceThreeButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/medium_margin"
         android:layout_marginVertical="@dimen/small_margin" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.example.quizgamev.ChoiceButton
         android:id="@+id/choiceFourButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,8 +59,10 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.example.quizgamev.ActionButton
         android:id="@+id/actionButton"
+        android:text="@string/next"
+        android:freezesText="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/medium_margin"

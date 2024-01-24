@@ -15,15 +15,15 @@ class QuizViewModel(private val repository: QuizRepository) : ViewModel() {
         val data = repository.questionAndChoices()
         val choices = data.choices.map {
             when {
-                it.correct -> ChoiceUiState.Correct(it.value)
-                text == it.value -> ChoiceUiState.Incorrect(it.value)
-                else -> ChoiceUiState.NotChosen(it.value)
+                it.correct -> ChoiceUiState.Correct
+                text == it.value -> ChoiceUiState.Incorrect
+                else -> ChoiceUiState.NotChosen
             }
         }
         return if (repository.isLastQuestion())
-            UiState.Last(data.question, choices)
+            UiState.Last(choices)
         else
-            UiState.Answered(data.question, choices)
+            UiState.Answered(choices)
     }
 
     fun next(): UiState {
