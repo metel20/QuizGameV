@@ -1,8 +1,10 @@
-package com.example.quizgamev
+package com.example.quizgamev.game
 
-import android.content.Context
+import com.example.quizgamev.main.LocalStorage
+import com.example.quizgamev.progress.QuizCacheDataSource
 
-interface QuizRepository {
+
+interface GameRepository {
 
     fun next()
 
@@ -15,27 +17,19 @@ interface QuizRepository {
     fun save()
 
     class Base(
+        quizCacheDataSource: QuizCacheDataSource.Read,
         private val permanentStorage: PermanentStorage
-    ) : QuizRepository {
+    ) : GameRepository {
 
-        private val list = listOf(
-            QuestionAndChoices(
-                question = "What color is christmas tree?", choices = listOf(
-                    Choice(value = "green", correct = true),
-                    Choice(value = "yellow", correct = false),
-                    Choice(value = "red", correct = false),
-                    Choice(value = "blue", correct = false)
-                )
-            ),
-            QuestionAndChoices(
-                question = "What color is milk?", choices = listOf(
-                    Choice(value = "green", correct = false),
-                    Choice(value = "white", correct = true),
-                    Choice(value = "red", correct = false),
-                    Choice(value = "blue", correct = false)
-                )
+        private val list: List<QuestionAndChoices> = quizCacheDataSource.read().map {
+            val choices = mutableListOf<Choice>()
+            choices.add(Choice(it.answer, true))
+            choices.addAll(
+                it.incorrectChoices.map { incorrect -> Choice(incorrect, false) }
             )
-        )
+            choices.shuffle()
+            QuestionAndChoices(it.question, choices)
+        }
 
         private var index = permanentStorage.index()
 
@@ -71,16 +65,14 @@ interface PermanentStorage {
 
     fun saveIndex(index: Int)
 
-    class Base(context: Context) : PermanentStorage {
-
-        private val sharedPref = context.getSharedPreferences("quizGameData", Context.MODE_PRIVATE)
+    class Base(private val localStorage: LocalStorage) : PermanentStorage {
 
         override fun index(): Int {
-            return sharedPref.getInt("index", 0)
+            return localStorage.read("index", 0)
         }
 
         override fun saveIndex(index: Int) {
-            sharedPref.edit().putInt("index", index).apply()
+            localStorage.save(index, "index")
         }
     }
 

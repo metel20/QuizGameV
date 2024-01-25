@@ -1,16 +1,18 @@
-package com.example.quizgamev
+package com.example.quizgamev.game
 
 import android.graphics.Color
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.FragmentActivity
+import com.example.quizgamev.R
 import java.io.Serializable
 
 interface UiState : Serializable {
 
     fun show(questionTextView: TextView)
     fun show(vararg choices: ChoiceButton)
-    fun show(actionButton: Button, activity: MainActivity)
+    fun show(actionButton: Button, activity: FragmentActivity)
 
     data class Question(
         private val question: String,
@@ -27,7 +29,7 @@ interface UiState : Serializable {
             }
         }
 
-        override fun show(actionButton: Button, activity: MainActivity) {
+        override fun show(actionButton: Button, activity: FragmentActivity) {
             actionButton.visibility = View.GONE
         }
     }
@@ -45,7 +47,7 @@ interface UiState : Serializable {
             }
         }
 
-        override fun show(actionButton: Button, activity: MainActivity) = with(actionButton) {
+        override fun show(actionButton: Button, activity: FragmentActivity) = with(actionButton) {
             visibility = View.VISIBLE
             setBackgroundColor(Color.parseColor("#6AD9E8"))
         }
@@ -64,7 +66,7 @@ interface UiState : Serializable {
             }
         }
 
-        override fun show(actionButton: Button, activity: MainActivity) = with(actionButton) {
+        override fun show(actionButton: Button, activity: FragmentActivity) = with(actionButton) {
             visibility = View.VISIBLE
             setText(R.string.game_over)
             setBackgroundColor(Color.parseColor("#6AD9E8"))
@@ -77,7 +79,8 @@ interface UiState : Serializable {
 
         override fun show(vararg choices: ChoiceButton) = Unit
 
-        override fun show(actionButton: Button, activity: MainActivity) = activity.finish()
+        override fun show(actionButton: Button, activity: FragmentActivity) =
+            activity.finish()//todo go to fragment load
     }
 }
 

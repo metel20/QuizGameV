@@ -1,4 +1,4 @@
-package com.example.quizgamev
+package com.example.quizgamev.game
 
 import android.content.Context
 import android.os.Build
@@ -6,7 +6,6 @@ import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
-
 
 class ChoiceButton : androidx.appcompat.widget.AppCompatButton {
 

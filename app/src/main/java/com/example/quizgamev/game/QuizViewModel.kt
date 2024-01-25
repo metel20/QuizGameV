@@ -1,8 +1,8 @@
-package com.example.quizgamev
+package com.example.quizgamev.game
 
 import androidx.lifecycle.ViewModel
 
-class QuizViewModel(private val repository: QuizRepository) : ViewModel() {
+class QuizViewModel(private val repository: GameRepository) : ViewModel() {
 
     fun init(): UiState {
         val data = repository.questionAndChoices()

@@ -3,6 +3,7 @@ package com.example.quizgamev
 import androidx.lifecycle.Lifecycle
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.quizgamev.main.MainActivity
 import junit.framework.TestCase.assertTrue
 import org.junit.Rule
 import org.junit.Test

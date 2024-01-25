@@ -1,5 +1,10 @@
 package com.example.quizgamev
 
+import com.example.quizgamev.game.ChoiceUiState
+import com.example.quizgamev.game.QuizViewModel
+import com.example.quizgamev.game.UiState
+
+import com.example.quizgamev.progress.QuizRepository
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
